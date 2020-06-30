@@ -4,17 +4,19 @@ import {
   CLEAR_MESSAGES,
   SHOW_DETAIL,
   INITIAL_MESSAGES,
+  EDIT_MESSAGE
 } from "../constant";
 
 //Action Creator
 
-export const addMessage = (username, description, duration, date) => {
+export const addMessage = (username, description, duration, date, showDetail) => {
   const action = {
     type: ADD_MESSAGE,
     username,
     description,
     duration,
     date,
+    showDetail
   };
   console.log("action in add", action);
   return action;
@@ -54,3 +56,15 @@ export const initializeMessage = (msg) => {
   console.log("action in initialize", action);
   return action;
 };
+
+export const editMessage = (id, username, description, duration, date) => {
+  const action = {
+    type: EDIT_MESSAGE,
+    id,
+    username,
+    description,
+    duration,
+    date
+  }
+  console.log("action in edit", action)
+}
