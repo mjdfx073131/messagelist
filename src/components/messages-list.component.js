@@ -74,8 +74,8 @@ class MessagesList extends Component {
           <thead className="thead-light">
             <tr>
               <th>Username</th>
+              <th>Age</th>
               <th>Description</th>
-              <th>Duration</th>
               <th>Date</th>
               <th>Actions</th>
             </tr>

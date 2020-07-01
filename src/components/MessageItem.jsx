@@ -33,9 +33,9 @@ class MessageItem extends Component {
         const {message} = this.props;
         //console.log(message);
         return (<tr>
-            <td onClick = {() => {this.getAge(message, message.username)}}><pre>{message.username}  {message.showDetail && this.state.age}</pre></td>
+            <td onClick = {() => {this.getAge(message, message.username)}}>{message.username}</td>
+            <td>{message.showDetail && this.state.age}</td>
             <td>{message.description}</td>
-            <td>{message.duration}</td>
             <td>{message.date.substring(0,10)}</td>
             <td>
               <Link to={"/edit/"+message._id}>edit</Link> | <a href="#" onClick={() => { this.deleteMessage(message._id)}}>delete</a>

@@ -4,3 +4,4 @@ export const CLEAR_MESSAGES = "CLEAR_MESSAGES";
 export const SHOW_DETAIL = "SHOW_DETAIL";
 export const INITIAL_MESSAGES = "INITIAL_MESSAGES";
 export const ADD_USER = "ADD_USER";
+export const EDIT_MESSAGE = "EDIT_MESSAGE"

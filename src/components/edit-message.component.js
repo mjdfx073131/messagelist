@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import {editMessage} from "../actions/";
+import { connect } from "react-redux";
 
-export default class EditMessage extends Component {
+class EditMessage extends Component {
   constructor(props) {
     super(props);
 
@@ -85,10 +87,9 @@ export default class EditMessage extends Component {
     }
 
     console.log(message);
-
     axios.post('http://localhost:5000/messages/update/' + this.props.match.params.id, message)
-      .then(res => console.log(res.data));
-
+      .then(res => console.log(res.data))
+    
     window.location = '/';
   }
 
@@ -123,7 +124,7 @@ export default class EditMessage extends Component {
               onChange={this.onChangeDescription}
               />
         </div>
-        <div className="form-group">
+        {/* <div className="form-group">
           <label>Duration (in minutes): </label>
           <input 
               type="text" 
@@ -131,7 +132,7 @@ export default class EditMessage extends Component {
               value={this.state.duration}
               onChange={this.onChangeDuration}
               />
-        </div>
+        </div> */}
         <div className="form-group">
           <label>Date: </label>
           <div>
@@ -150,3 +151,14 @@ export default class EditMessage extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  //console.log ("mapStatetoProps", state);
+  return {
+    messages: state,
+  };
+};
+
+export default connect(mapStateToProps, {
+editMessage
+})(EditMessage);
