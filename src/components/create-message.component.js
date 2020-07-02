@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { connect } from "react-redux";
 import {
-  addMessage, showDetail,
+  addMessage
 } from "../actions";
 class CreateMessage extends Component {
   constructor(props) {
@@ -86,7 +86,8 @@ class CreateMessage extends Component {
         this.state.username,
         this.state.description,
         this.state.duration,
-        this.state.date));
+        this.state.date,
+        this.state.showDetail));
 
     window.location = '/';
   }
@@ -121,7 +122,7 @@ class CreateMessage extends Component {
               onChange={this.onChangeDescription}
               />
         </div>
-        <div className="form-group">
+        {/* <div className="form-group">
           <label>Duration (in minutes): </label>
           <input 
               type="text" 
@@ -129,7 +130,7 @@ class CreateMessage extends Component {
               value={this.state.duration}
               onChange={this.onChangeDuration}
               />
-        </div>
+        </div> */}
         <div className="form-group">
           <label>Date: </label>
           <div>
