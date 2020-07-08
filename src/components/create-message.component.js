@@ -69,7 +69,6 @@ class CreateMessage extends Component {
   onSubmit(e) {
     e.preventDefault();
     
-
     const message = {
       username: this.state.username,
       description: this.state.description,
