@@ -4,8 +4,8 @@ import {
   CLEAR_MESSAGES,
   SHOW_DETAIL,
   INITIAL_MESSAGES,
+  EDIT_MESSAGE,
 } from "../constant";
-import { bake_cookie, read_cookie } from "sfcookies";
 
 const message = (action) => {
   let { username,
@@ -53,6 +53,20 @@ const showDetailById = (state = [], id) => {
   return messages;
 };
 
+const editMessageById = ( state = [], action) =>{
+  const messages = state;
+  for (let msg of messages) {
+    if (msg._id === action.id) {
+      msg.description = action.description;
+      msg.duration = action.duration;
+      msg.date =action.date;
+      msg.username =action.username;
+    }
+  }
+  return messages;
+
+}
+
 const messages = (state = [], action) => {
   let messages = null;
   //state = read_cookie("messages");
@@ -83,6 +97,9 @@ const messages = (state = [], action) => {
       messages = [];
       //bake_cookie("messages", messages);
       return messages;
+    case EDIT_MESSAGE:
+      messages = editMessageById(state, action);
+      return messages
     default:
       return state;
   }
