@@ -1,47 +1,56 @@
 import {
-    ADD_MESSAGE,
-    DELETE_MESSAGE,
-    CLEAR_MESSAGES,
-    SHOW_DETAIL,
-  } from "../constant";
-  
-  //Action Creator
-  
-  export const addMessage = (text, dueDate, showDetail) => {
-    const action = {
-      type: ADD_MESSAGE,
-      payload: {
-        text,
-        dueDate,
-        showDetail,
-      } 
-    };
-    console.log("action in add", action);
-    return action;
+  ADD_MESSAGE,
+  DELETE_MESSAGE,
+  CLEAR_MESSAGES,
+  SHOW_DETAIL,
+  INITIAL_MESSAGES,
+} from "../constant";
+
+//Action Creator
+
+export const addMessage = (username, description, duration, date) => {
+  const action = {
+    type: ADD_MESSAGE,
+    username,
+    description,
+    duration,
+    date,
   };
-  
-  export const showDetail = (id) => {
-    const action = {
-      type: SHOW_DETAIL,
-      id,
-    };
-    console.log("action in detail", action);
-    return action;
+  console.log("action in add", action);
+  return action;
+};
+
+export const showDetail = (id) => {
+  const action = {
+    type: SHOW_DETAIL,
+    id,
   };
-  export const deleteMessage = (id) => {
-    const action = {
-      type: DELETE_MESSAGE,
-      id,
-    };
-    console.log("action in remove", action);
-    return action;
+  console.log("action in detail", action);
+  return action;
+};
+
+export const deleteMessage = (id) => {
+  const action = {
+    type: DELETE_MESSAGE,
+    id,
   };
-  
-  export const clearMessages = () => {
-    const action = {
-      type: CLEAR_MESSAGES,
-    };
-    console.log("action in clear", action);
-    return action;
+  console.log("action in remove", action);
+  return action;
+};
+
+export const clearMessages = () => {
+  const action = {
+    type: CLEAR_MESSAGES,
   };
-  
+  console.log("action in clear", action);
+  return action;
+};
+
+export const initializeMessage = (msg) => {
+  const action = {
+    type: INITIAL_MESSAGES,
+    msg,
+  };
+  console.log("action in initialize", action);
+  return action;
+};

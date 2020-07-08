@@ -7,9 +7,10 @@ export default class CreateUser extends Component {
 
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-
+    this.onChangeAge = this.onChangeAge.bind(this);
     this.state = {
-      username: ''
+      username: '',
+      age: null
     }
   }
 
@@ -18,12 +19,18 @@ export default class CreateUser extends Component {
       username: e.target.value
     })
   }
+  onChangeAge(e) {
+    this.setState({
+      age: e.target.value
+    })
+  }
 
   onSubmit(e) {
     e.preventDefault();
 
     const user = {
-      username: this.state.username
+      username: this.state.username,
+      age:this.state.age
     }
 
     console.log(user);
@@ -32,7 +39,8 @@ export default class CreateUser extends Component {
       .then(res => console.log(res.data));
 
     this.setState({
-      username: ''
+      username: '',
+      age: null
     })
   }
 
@@ -48,6 +56,13 @@ export default class CreateUser extends Component {
                 className="form-control"
                 value={this.state.username}
                 onChange={this.onChangeUsername}
+                />
+            <label>Age: </label>
+            <input  type="text"
+                required
+                className="form-control"
+                value={this.state.age}
+                onChange={this.onChangeAge}
                 />
           </div>
           <div className="form-group">

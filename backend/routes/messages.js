@@ -37,6 +37,17 @@ router.route('/:id').delete((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/').delete((req, res) => {
+  Message.deleteMany()
+    .then(() => {
+        res.json(('Delete All'));
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while deleting all messages."
+        });
+    });
+})
+
 router.route('/update/:id').post((req, res) => {
   Message.findById(req.params.id)
     .then(message => {

@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
-
-export default class CreateMessage extends Component {
+import { connect } from "react-redux";
+import {
+  addMessage, showDetail,
+} from "../actions";
+class CreateMessage extends Component {
   constructor(props) {
     super(props);
 
@@ -18,7 +21,8 @@ export default class CreateMessage extends Component {
       description: '',
       duration: 0,
       date: new Date(),
-      users: []
+      users: [],
+      showDetail:false
     }
   }
 
@@ -64,22 +68,28 @@ export default class CreateMessage extends Component {
 
   onSubmit(e) {
     e.preventDefault();
+    
 
     const message = {
       username: this.state.username,
       description: this.state.description,
       duration: this.state.duration,
-      date: this.state.date
+      date: this.state.date,
+      showDetail: this.state.showDetail
     }
 
     console.log(message);
 
     axios.post('http://localhost:5000/messages/add', message)
-      .then(res => console.log(res.data));
+      .then(res => console.log(res.data))
+      .then(this.props.addMessage(
+        this.state.username,
+        this.state.description,
+        this.state.duration,
+        this.state.date));
 
     window.location = '/';
   }
-
   render() {
     return (
     <div>
@@ -131,10 +141,20 @@ export default class CreateMessage extends Component {
         </div>
 
         <div className="form-group">
-          <input type="submit" value="Create Message" className="btn btn-primary" />
+          <input type="submit" value="Create Message" className="btn btn-primary"/>
         </div>
       </form>
     </div>
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    messages: state,
+  };
+};
+
+export default connect(mapStateToProps, {
+  addMessage
+})(CreateMessage);

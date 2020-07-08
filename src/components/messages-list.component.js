@@ -1,54 +1,72 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import React, { Component } from "react";
+import axios from "axios";
+import { connect } from "react-redux";
+import { deleteMessage, clearMessages, initializeMessage } from "../actions/";
+import MessageItem from "./MessageItem";
 
-const Message = props => (
-  <tr>
-    <td>{props.message.username}</td>
-    <td>{props.message.description}</td>
-    <td>{props.message.duration}</td>
-    <td>{props.message.date.substring(0,10)}</td>
-    <td>
-      <Link to={"/edit/"+props.message._id}>edit</Link> | <a href="#" onClick={() => { props.deleteMessage(props.message._id) }}>delete</a>
-    </td>
-  </tr>
-)
+const fetchInitialMessage = async () => {
+  try {
+    const retrievedMessages = await fetch('http://localhost:5000/messages');
+    console.log(retrievedMessages);
+    return (await retrievedMessages.json());
 
-export default class MessagesList extends Component {
+  }catch(err) {
+    console.error('===\n ERROR fetchInitialMessageArray \n===');
+  }
+};
+
+
+class MessagesList extends Component {
   constructor(props) {
     super(props);
+    //console.log(this.props);
+    this.deleteMessageAll = this.deleteMessageAll.bind(this);
 
-    this.deleteMessage = this.deleteMessage.bind(this)
-
-    this.state = {messages: []};
+    this.state = { messages: [] };
   }
 
-  componentDidMount() {
-    axios.get('http://localhost:5000/messages/')
-      .then(response => {
-        this.setState({ messages: response.data })
+  async componentDidMount() {
+    
+    axios
+      .get("http://localhost:5000/messages/")
+      .then((response) => {
+        this.setState({ messages: response.data });
       })
       .catch((error) => {
         console.log(error);
-      })
+      });
+    
+      let initialAry = await fetchInitialMessage();
+      this.props.initializeMessage(initialAry);
   }
-
-  deleteMessage(id) {
-    axios.delete('http://localhost:5000/messages/'+id)
-      .then(response => { console.log(response.data)});
-
-    this.setState({
-      messages: this.state.messages.filter(el => el._id !== id)
-    })
+  deleteMessageAll() {
+    axios
+      .delete("http://localhost:5000/messages/").then(response => { console.log(response.data)})
+      .then(this.props.clearMessages())
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   messageList() {
-    return this.state.messages.map(currentMessage => {
-      return <Message message={currentMessage} deleteMessage={this.deleteMessage} key={currentMessage._id}/>;
-    })
+    const { messages } = this.props;
+    console.log("messages", messages);
+    return messages.map((currentMessage) => {
+      return (
+        <MessageItem
+          message={currentMessage}
+          key={currentMessage._id}
+        />
+      );
+    });
+    // return this.state.messages.map(currentMessage => {
+    //   return <MessageItem message={currentMessage} deleteMessage={this.props.deleteMessage} key={currentMessage._id}/>;
+    // })
   }
 
   render() {
+    //console.log("props", this.props);
+    // console.log("state", this.state);
     return (
       <div>
         <h3>Messages</h3>
@@ -62,11 +80,28 @@ export default class MessagesList extends Component {
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>
-            { this.messageList() }
-          </tbody>
+          <tbody>{this.messageList()}</tbody>
         </table>
+        <div
+            className="btn btn-warning btn-lg"
+            onClick={() => this.deleteMessageAll()}
+          >
+            Clear
+          </div>
       </div>
-    )
+    );
   }
 }
+
+const mapStateToProps = (state) => {
+    //console.log ("mapStatetoProps", state);
+    return {
+      messages: state,
+    };
+  };
+
+export default connect(mapStateToProps, {
+  deleteMessage,
+  clearMessages,
+  initializeMessage
+})(MessagesList);

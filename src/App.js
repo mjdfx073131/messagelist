@@ -14,7 +14,7 @@ function App() {
       <div className="container">
       <Navbar />
       <br/>
-      <Route path="/" exact component={MessagesList} />
+      <Route path="/" exact component={MessagesList} /> 
       <Route path="/edit/:id" component={EditMessage} />
       <Route path="/create" component={CreateMessage} />
       <Route path="/user" component={CreateUser} />
