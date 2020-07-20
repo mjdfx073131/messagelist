@@ -39,7 +39,7 @@ export default class CreateUser extends Component {
       .then(res => console.log(res.data));
 
    
-    window.location = 'https://quiet-mountain-30375.herokuapp.com/create';
+    window.location = '/';
 
   }
 
