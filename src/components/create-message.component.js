@@ -79,7 +79,7 @@ class CreateMessage extends Component {
 
     console.log(message);
 
-    axios.post('http://localhost:5000/messages/add', message)
+    axios.post('https://quiet-mountain-30375.herokuapp.com/messages/add', message)
       .then(res => console.log(res.data))
       .then(this.props.addMessage(
         this.state.username,

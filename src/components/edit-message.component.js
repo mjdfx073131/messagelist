@@ -87,7 +87,7 @@ class EditMessage extends Component {
     }
 
     console.log(message);
-    axios.post('http://localhost:5000/messages/update/' + this.props.match.params.id, message)
+    axios.post('https://quiet-mountain-30375.herokuapp.com/messages/update/' + this.props.match.params.id, message)
       .then(res => console.log(res.data))
     
     window.location = '/';
