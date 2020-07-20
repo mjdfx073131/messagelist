@@ -6,7 +6,7 @@ import MessageItem from "./MessageItem";
 
 const fetchInitialMessage = async () => {
   try {
-    const retrievedMessages = await fetch('http://localhost:5000/messages');
+    const retrievedMessages = await fetch('https://localhost:5000/messages');
     console.log(retrievedMessages);
     return (await retrievedMessages.json());
 
@@ -28,7 +28,7 @@ class MessagesList extends Component {
   async componentDidMount() {
     
     axios
-      .get("http://localhost:5000/messages/")
+      .get("https://localhost:5000/messages/")
       .then((response) => {
         this.setState({ messages: response.data });
       })
@@ -41,7 +41,7 @@ class MessagesList extends Component {
   }
   deleteMessageAll() {
     axios
-      .delete("http://localhost:5000/messages/").then(response => { console.log(response.data)})
+      .delete("https://localhost:5000/messages/").then(response => { console.log(response.data)})
       .then(this.props.clearMessages())
       .catch((error) => {
         console.log(error);
