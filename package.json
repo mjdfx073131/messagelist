@@ -2,6 +2,10 @@
   "name": "messagelist",
   "version": "0.1.0",
   "private": true,
+  "engine": {
+    "node": "10.16.3",
+    "npm": "6.14.5"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -23,10 +27,11 @@
     "sfcookies": "^1.0.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "cd backend && node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "npm install && npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"
