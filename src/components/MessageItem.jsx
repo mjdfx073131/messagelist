@@ -14,11 +14,11 @@ class MessageItem extends Component {
     this.state = {age: 0}
   }
   deleteMessage(id) {
-    axios.delete('http://localhost:5000/messages/'+id)
+    axios.delete('https://quiet-mountain-30375.herokuapp.com/messages/'+id)
       .then(response => { console.log(response.data)}).then(this.props.deleteMessage(id));
   }
   getAge(message,username) {
-    axios.get('http://localhost:5000/users/' + username)
+    axios.get('https://quiet-mountain-30375.herokuapp.com/users/' + username)
       .then(response => {
         this.setState({
           age: response.data[0].age

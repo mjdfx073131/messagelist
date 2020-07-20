@@ -27,7 +27,7 @@ class CreateMessage extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/users/')
+    axios.get('https://quiet-mountain-30375.herokuapp.com/users/')
       .then(response => {
         if (response.data.length > 0) {
           this.setState({

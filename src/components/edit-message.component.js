@@ -25,7 +25,7 @@ class EditMessage extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/messages/'+this.props.match.params.id)
+    axios.get('https://quiet-mountain-30375.herokuapp.com/messages/'+this.props.match.params.id)
       .then(response => {
         this.setState({
           username: response.data.username,
@@ -38,7 +38,7 @@ class EditMessage extends Component {
         console.log(error);
       })
 
-    axios.get('http://localhost:5000/users/')
+    axios.get('https://quiet-mountain-30375.herokuapp.com/users/')
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
