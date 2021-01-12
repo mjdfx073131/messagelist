@@ -8,4 +8,4 @@
       \/     \/     \/     \/      \//_____/      \/        \/       \/        
 ```
 
-A MERN (MongoDB + Express + React + Node.js) app which also uses Redux to monitor states and deploy to Heroku. MessageList allows user to add/edit/delete messages.[Link](https://quiet-mountain-30375.herokuapp.com)
+A MERN (MongoDB + Express + React + Node.js) app deployed to Heroku which also uses Redux to monitor states. MessageList allows user to add/edit/delete messages.[Link](https://quiet-mountain-30375.herokuapp.com)
